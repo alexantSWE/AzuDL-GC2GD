@@ -25,7 +25,7 @@ class AzuDlGC2GD:
     def __init__(self):
         self.project_name = "AzuDl - GC2GD"
         self.project_subtitle = "Azizi Universal Downloader - Google Colab to Google Drive"
-        self.version = "1.2.0"
+        self.version = "1.2.1"
 
         self.drive_mount_path = Path("/content/drive")
         self.my_drive_path = self.drive_mount_path / "MyDrive"
@@ -898,9 +898,9 @@ class AzuDlGC2GD:
             kind = "video+audio"
 
             if vcodec != "none" and acodec == "none":
-                kind = "video"
+                kind = "video only"
             elif vcodec == "none" and acodec != "none":
-                kind = "audio"
+                kind = "audio only"
 
             size = self.format_bytes(filesize) if filesize else "unknown"
 
@@ -920,14 +920,14 @@ class AzuDlGC2GD:
         rows = self.list_youtube_formats(url)
 
         print("Available formats:")
-        print("-" * 110)
-        print(f"{'ID':<12} {'TYPE':<12} {'EXT':<8} {'RESOLUTION':<14} {'FPS':<6} {'SIZE':<14} NOTE")
-        print("-" * 110)
+        print("-" * 120)
+        print(f"{'ID':<12} {'TYPE':<14} {'EXT':<8} {'RESOLUTION':<14} {'FPS':<6} {'SIZE':<14} NOTE")
+        print("-" * 120)
 
         for row in rows:
             print(
                 f"{row['id']:<12} "
-                f"{row['kind']:<12} "
+                f"{row['kind']:<14} "
                 f"{row['ext']:<8} "
                 f"{row['resolution']:<14} "
                 f"{str(row['fps']):<6} "
@@ -935,25 +935,71 @@ class AzuDlGC2GD:
                 f"{row['note']}"
             )
 
-        print("-" * 110)
+        print("-" * 120)
+        print("Tip:")
+        print("If a format is video only, use format_id+audio_id, for example 137+140.")
+        print("If you enter only a video-only format ID, AzuDl will try to add best audio automatically.")
+
+    def normalize_youtube_custom_format(self, url, custom_format):
+        custom_format = str(custom_format or "").strip()
+
+        if not custom_format:
+            return ""
+
+        if "+" in custom_format or "/" in custom_format:
+            return custom_format
+
+        try:
+            with YoutubeDL({"quiet": True, "no_warnings": True}) as ydl:
+                info = ydl.extract_info(url, download=False)
+
+            formats = info.get("formats", [])
+
+            for item in formats:
+                if str(item.get("format_id")) == custom_format:
+                    vcodec = item.get("vcodec")
+                    acodec = item.get("acodec")
+
+                    if vcodec != "none" and acodec == "none":
+                        print("Selected custom format is video only")
+                        print("Auto adding best available audio")
+                        return f"{custom_format}+ba/best"
+
+                    if vcodec == "none" and acodec != "none":
+                        print("Selected custom format is audio only")
+                        return custom_format
+
+                    return custom_format
+
+        except Exception as error:
+            print("Could not inspect custom format:", error)
+
+        return f"{custom_format}+ba/best"
 
     def build_youtube_format(self, quality, audio_only, custom_format):
-        quality = quality.strip().lower()
-        custom_format = custom_format.strip()
-
-        if custom_format:
-            return custom_format
+        quality = str(quality or "best").strip().lower()
+        custom_format = str(custom_format or "").strip()
 
         if audio_only:
             return "bestaudio/best"
 
+        if custom_format:
+            if "+" in custom_format or "/" in custom_format:
+                return custom_format
+
+            return f"{custom_format}+ba/best"
+
         if quality == "best":
-            return "bv*+ba/best"
+            return "bv*[vcodec!=none]+ba/bestvideo+bestaudio/best"
 
         if quality in ["4320", "2160", "1440", "1080", "720", "480", "360"]:
-            return f"bv*[height<={quality}]+ba/best[height<={quality}]/best"
+            return (
+                f"bv*[height<={quality}][vcodec!=none]+ba/"
+                f"bestvideo[height<={quality}]+bestaudio/"
+                f"best[height<={quality}]/best"
+            )
 
-        return "bv*+ba/best"
+        return "bv*[vcodec!=none]+ba/bestvideo+bestaudio/best"
 
     def download_youtube(self, url, folder_name="", quality="best", audio_only=False, custom_format="", playlist=True, metadata=False):
         url = url.strip()
@@ -1001,6 +1047,7 @@ class AzuDlGC2GD:
                 progress_state["last"] = 0
                 print("Processing file")
 
+        custom_format = self.normalize_youtube_custom_format(url, custom_format)
         selected_format = self.build_youtube_format(quality, audio_only, custom_format)
 
         if audio_only:
@@ -1014,8 +1061,7 @@ class AzuDlGC2GD:
         else:
             postprocessors = [
                 {
-                    "key": "FFmpegVideoConvertor",
-                    "preferedformat": "mp4"
+                    "key": "FFmpegMetadata"
                 }
             ]
 
@@ -1028,6 +1074,7 @@ class AzuDlGC2GD:
             "continuedl": True,
             "retries": 10,
             "fragment_retries": 10,
+            "concurrent_fragment_downloads": 4,
             "progress_hooks": [hook],
             "postprocessors": postprocessors,
             "quiet": True,
@@ -1399,6 +1446,19 @@ Main options:
 18. Developer
 19. Help
 20. Exit
+
+YouTube audio debug:
+YouTube often provides high quality video and audio as separate streams.
+If you select a video-only custom format ID, AzuDl tries to add best available audio automatically.
+
+Wrong example:
+137
+
+Better example:
+137+140
+
+Automatic behavior:
+137 -> 137+ba/best
 
 Auto detect:
 Paste any supported link.
