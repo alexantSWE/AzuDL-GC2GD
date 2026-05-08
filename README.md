@@ -1,160 +1,119 @@
 # AzuDl - GC2GD
 
-<p align="center">
-  <a href="README.fa.md">فارسی</a> · <strong>English</strong>
-</p>
+**Azizi Universal Downloader - Google Colab to Google Drive**
 
-<p align="center">
-  <strong>Azizi Universal Downloader - Google Colab to Google Drive</strong>
-</p>
+AzuDl - GC2GD is a Google Colab based universal downloader that downloads supported files directly to Google Drive. It supports direct links, YouTube videos and playlists, torrent magnet links, `.torrent` files, private torrent mode, batch downloads, download history, file management tools, ZIP creation, SHA256 hashing, aria2 status monitoring, duplicate torrent detection, live seeding status, and resumable downloads using aria2 session persistence.
 
-<p align="center">
-  A powerful Google Colab downloader and file utility toolkit that saves downloads directly to Google Drive.
-</p>
-
-<p align="center">
-  <code>Google Colab</code> · <code>Google Drive</code> · <code>aria2</code> · <code>yt-dlp</code> · <code>FFmpeg</code> · <code>Python</code>
-</p>
+> فارسی: [README.fa.md](README.fa.md)
 
 ---
 
-## Overview
+## Version
 
-**AzuDl - GC2GD** stands for:
-
-> **Azizi Universal Downloader - Google Colab to Google Drive**
-
-It is a Google Colab-based downloader that saves supported downloads directly into Google Drive.
-
-Version **1.2.0** improves the original downloader with better torrent handling, `.torrent` file support, direct-link headers, YouTube metadata options, storage reports, SHA256 hashing, ZIP tools, and aria2 management utilities.
-
----
-
-## For Regular Users
-
-AzuDl is useful when you want to download supported files without keeping your personal computer running.
-
-You open Google Colab, run the code, connect Google Drive, paste a supported link, and the final file is saved into your Drive.
-
-You can use it for:
-
-- Direct file links
-- YouTube videos
-- YouTube playlists
-- YouTube audio extraction as MP3
-- Magnet torrents
-- `.torrent` files
-- Batch downloads
-- ZIP creation
-- File integrity checking with SHA256
-
----
-
-## For Developers
-
-The project is built around one Python class:
-
-```python
-class AzuDlGC2GD:
+```text
+Version: 1.2.8
 ```
-
-It manages:
-
-- Google Drive mounting
-- Project folder creation
-- aria2 RPC startup
-- JSON-RPC communication with aria2
-- Magnet metadata detection
-- Real torrent GID resolution after metadata
-- `.torrent` loading through `aria2.addTorrent`
-- Direct URL downloads through aria2
-- YouTube downloads through `yt-dlp`
-- Progress bars through `tqdm.notebook`
-- Download history
-- Storage reports
-- SHA256 hashing
-- ZIP archive creation
-- aria2 task management
 
 ---
 
 ## Features
 
-### Download Features
-
-- Magnet torrent downloads
-- Real torrent progress after metadata fetching
-- `.torrent` file download from URL or local path
-- Direct link downloads
-- Optional HTTP headers for direct links
-- YouTube video downloads
-- YouTube playlist downloads
-- YouTube audio-only MP3 extraction
+- Direct link download to Google Drive
+- YouTube video download
+- YouTube playlist download
 - YouTube quality selection
+- YouTube audio-only MP3 extraction
 - Custom YouTube format ID support
-- Optional YouTube metadata and thumbnail saving
-- Batch download mode
-- Speed limit support for aria2 downloads
-- Resume support
-
-### File Utility Features
-
+- Auto-fix for video-only YouTube formats by adding best available audio
+- Magnet torrent download
+- `.torrent` file download from URL or local path
+- Private torrent mode
+- Optional torrent seeding after download
+- Live torrent download progress
+- Live torrent seeding status
+- Upload speed display during seeding
+- Uploaded size display during seeding
+- Torrent ratio display
+- Seeder and connection display
+- Duplicate torrent InfoHash detection
+- Resume existing aria2 torrent tasks instead of adding duplicates
+- Remove errored duplicate torrents automatically
+- aria2 session persistence
+- Resume-friendly download behavior
+- Auto link type detection
+- Batch download
+- Download history
 - List downloaded files
-- Show latest downloaded file
+- Latest file viewer
 - Google Drive storage report
-- Project folder size report
-- SHA256 hash for latest file
-- SHA256 hash for selected file
-- ZIP any folder
+- SHA256 hash for latest or selected files
+- ZIP selected folder
 - ZIP latest downloaded folder
-- Download history log
-
-### aria2 Management Features
-
-- Show active, waiting, and stopped aria2 tasks
-- Remove aria2 GID
-- Clear stopped aria2 results
-- Better torrent status display
-- Better progress details with speed, percentage, connections, and seeders
+- Dedicated Torrent Tools menu
+- Developer information section
+- Built-in help menu
 
 ---
 
-## Menu
+## What Is New in v1.2.8
+
+Version `1.2.8` focuses on torrent reliability and better torrent management.
+
+AzuDl now reads the torrent `InfoHash` before adding a `.torrent` file to aria2. If the same torrent already exists in aria2, AzuDl does not add a duplicate torrent. It detects the existing GID, resumes or monitors the existing task, and if the existing torrent is in an error state, it removes it and adds the torrent again.
+
+This prevents common aria2 errors like:
+
+```text
+InfoHash is already registered
+```
+
+---
+
+## Main Menu
 
 ```text
 1. Auto detect link
-2. Torrent magnet
-3. Torrent file
-4. YouTube video or playlist
-5. Direct link
-6. Batch download
-7. Download history
-8. List downloaded files
-9. Storage report
-10. SHA256 latest file
-11. SHA256 selected file
-12. ZIP folder
-13. ZIP latest folder
-14. aria2 status
-15. Remove aria2 GID
-16. Clear stopped aria2 results
-17. Latest file
-18. Developer
-19. Help
-20. Exit
+2. Torrent tools
+3. YouTube video or playlist
+4. Direct link
+5. Batch download
+6. Download history
+7. List downloaded files
+8. Storage report
+9. SHA256 latest file
+10. SHA256 selected file
+11. ZIP folder
+12. ZIP latest folder
+13. Latest file
+14. Developer
+15. Help
+16. Exit
+```
+
+---
+
+## Torrent Tools Menu
+
+```text
+1. Torrent magnet
+2. Torrent file
+3. Private torrent
+4. aria2 status
+5. Remove aria2 GID
+6. Clear stopped aria2 results
+7. Save aria2 session
+8. Back
 ```
 
 ---
 
 ## Storage Structure
 
-AzuDl creates this directory:
+AzuDl creates the following folder structure in Google Drive:
 
 ```text
 /content/drive/MyDrive/AzuDl-GC2GD
 ```
-
-Folder layout:
 
 ```text
 AzuDl-GC2GD/
@@ -164,122 +123,121 @@ AzuDl-GC2GD/
 ├── BatchDownloads/
 ├── Archives/
 └── Logs/
-    └── download_history.json
 ```
 
 | Folder | Purpose |
 |---|---|
-| `TorrentDownloads` | Magnet and `.torrent` downloads |
-| `YouTubeDownloads` | YouTube video, playlist, audio, metadata, and thumbnail outputs |
+| `TorrentDownloads` | Torrent magnet and `.torrent` downloads |
+| `YouTubeDownloads` | YouTube video, playlist, and audio downloads |
 | `DirectDownloads` | Direct URL downloads |
-| `BatchDownloads` | Grouped batch downloads |
-| `Archives` | ZIP archives created by the tool |
-| `Logs` | Download history and logs |
+| `BatchDownloads` | Batch download outputs |
+| `Archives` | ZIP files created by AzuDl |
+| `Logs` | History, aria2 session file, and debug files |
 
 ---
 
-## Torrent Improvements in v1.2.0
+## aria2 Session File
 
-Magnet links work in stages:
-
-```text
-Magnet link
-  ↓
-Metadata download
-  ↓
-Real torrent task
-  ↓
-Actual file download
-```
-
-Older versions could show only the metadata download, such as:
+AzuDl stores aria2 session data here:
 
 ```text
-Torrent: 100% 5.77k/5.77k
+/content/drive/MyDrive/AzuDl-GC2GD/Logs/aria2.session
 ```
 
-That was not the real file download. It was only the torrent metadata.
+This file helps aria2 reload unfinished tasks after restarting the notebook.
 
-Version **1.2.0** detects the real torrent `GID` after metadata is fetched and monitors the actual file download.
-
-Expected output:
+AzuDl uses:
 
 ```text
-Magnet added
-Metadata GID: ...
-Fetching metadata: 100%
-Metadata completed
-Real torrent GID: ...
-Starting torrent download monitor
-Torrent Download: ...
+--continue=true
+--always-resume=true
+--save-session
+--input-file
+--force-save=true
 ```
+
+This makes downloads more resume-friendly.
 
 ---
 
-## Torrent Magnet Usage
+## Important Note About Google Colab Timeout
 
-Choose:
+AzuDl does not bypass Google Colab timeout. Google Colab may disconnect idle or long-running sessions depending on its runtime policies.
 
-```text
-2. Torrent magnet
-```
+AzuDl improves reliability by saving aria2 session data, saving files directly to Google Drive, enabling resume options in aria2, detecting existing torrent tasks, and continuing existing aria2 jobs where possible.
 
-Then paste:
-
-```text
-magnet:?xt=urn:btih:EXAMPLE_HASH
-```
-
-Optional speed limit examples:
-
-```text
-500K
-2M
-10M
-```
+For long-term torrent seeding or unattended downloading, use a VPS or seedbox.
 
 ---
 
-## Torrent File Usage
+## Supported Link Types
 
-Choose:
-
-```text
-3. Torrent file
-```
-
-You can enter a `.torrent` URL:
+AzuDl can automatically detect:
 
 ```text
+magnet:?...
+https://example.com/file.zip
 https://example.com/file.torrent
+https://youtube.com/...
+https://youtu.be/...
 ```
 
-or a local Colab/Drive path:
+| Type | Supported |
+|---|---|
+| Direct HTTP/HTTPS links | Yes |
+| FTP links | Yes |
+| YouTube videos | Yes |
+| YouTube playlists | Yes |
+| Magnet links | Yes |
+| `.torrent` URLs | Yes |
+| Local `.torrent` files | Yes |
+| Batch links | Yes |
+
+---
+
+## Direct Downloads
+
+AzuDl can download direct links using aria2.
+
+Examples:
 
 ```text
-/content/drive/MyDrive/file.torrent
+https://example.com/file.zip
+https://example.com/video.mp4
+https://example.com/archive.rar
+https://example.com/document.pdf
+```
+
+Optional fields:
+
+- Folder name
+- Output file name
+- Speed limit
+- Custom headers as JSON
+
+Example custom headers:
+
+```json
+{"User-Agent":"Mozilla/5.0","Referer":"https://example.com"}
 ```
 
 ---
 
-## YouTube Usage
+## YouTube Downloads
 
-Choose:
+AzuDl uses `yt-dlp` to download YouTube videos and playlists.
 
-```text
-4. YouTube video or playlist
-```
+Supported options:
 
-Supported examples:
+- Best quality
+- Quality limit
+- Audio-only MP3
+- Playlist download
+- Custom format ID
+- Metadata saving
+- Thumbnail saving
 
-```text
-https://www.youtube.com/watch?v=VIDEO_ID
-https://youtu.be/VIDEO_ID
-https://www.youtube.com/playlist?list=PLAYLIST_ID
-https://music.youtube.com/watch?v=VIDEO_ID
-```
-
-Quality presets:
+Available quality values:
 
 ```text
 best
@@ -292,7 +250,27 @@ best
 360
 ```
 
-Custom format examples:
+---
+
+## YouTube Audio Fix
+
+Some YouTube formats are video-only, especially high quality formats.
+
+For example:
+
+```text
+137
+```
+
+is often a video-only format.
+
+AzuDl automatically tries to add the best available audio:
+
+```text
+137 -> 137+ba/best
+```
+
+Recommended custom format examples:
 
 ```text
 137+140
@@ -302,114 +280,228 @@ Custom format examples:
 best
 ```
 
-Audio-only mode saves MP3 output. Metadata mode can save `.info.json` and thumbnails.
-
 ---
 
-## Direct Link Usage
+## MP3 Audio Extraction
 
 Choose:
 
 ```text
-5. Direct link
+Audio only? y
 ```
 
-Supported protocols:
+AzuDl extracts audio as:
 
 ```text
-http://
-https://
-ftp://
+MP3 320kbps
 ```
 
-Optional fields:
+---
+
+## Torrent Downloads
+
+AzuDl supports magnet links, `.torrent` file URLs, local `.torrent` files, private torrent mode, optional seeding, live download progress, live seeding status, duplicate InfoHash handling, and aria2 resume/session persistence.
+
+### Magnet example
 
 ```text
-Folder name
-File name
-Speed limit
-Headers JSON
+magnet:?xt=urn:btih:EXAMPLE_HASH
 ```
 
-Header example:
+Use:
 
-```json
-{"User-Agent":"Mozilla/5.0","Referer":"https://example.com"}
+```text
+Torrent Tools > Torrent magnet
 ```
+
+### Torrent file example
+
+```text
+https://example.com/file.torrent
+```
+
+Use:
+
+```text
+Torrent Tools > Torrent file
+```
+
+For public torrents, use `Torrent file`, not `Private torrent`.
+
+---
+
+## Private Torrent Mode
+
+Private torrent mode is designed for private trackers.
+
+Use:
+
+```text
+Torrent Tools > Private torrent
+```
+
+Recommended input:
+
+```text
+.torrent file from your private tracker
+```
+
+Private mode disables:
+
+```text
+DHT
+DHT6
+PEX
+LPD
+```
+
+This is important for private trackers because many private trackers do not allow public peer discovery.
+
+---
+
+## Seeding
+
+When AzuDl asks:
+
+```text
+Keep seeding after download? y/n
+```
+
+Choose:
+
+```text
+y
+```
+
+to keep seeding after the download completes.
+
+AzuDl displays live seeding information:
+
+```text
+Upload speed
+Uploaded size
+Ratio
+Connections
+Seeders
+Elapsed seeding time
+```
+
+Example:
+
+```text
+Seeding Upload: up=1.20 MB/s, uploaded=350.40 MB, ratio=0.42, connections=8, seeders=12, time=08:31
+```
+
+Seeding only works while the Colab runtime is alive. For long-term seeding, use a VPS, seedbox, or dedicated server.
+
+---
+
+## Why AzuDl Uses 525600 Minutes for Seeding
+
+Some aria2 builds do not accept:
+
+```text
+seed-time=-1
+```
+
+So AzuDl uses:
+
+```text
+525600
+```
+
+This means 525600 minutes, which is around one year. Since Colab will disconnect much earlier than that, this effectively means: seed as long as the Colab runtime is alive.
+
+---
+
+## Duplicate Torrent Handling
+
+AzuDl reads the torrent InfoHash before adding `.torrent` files. If the torrent is already registered in aria2, AzuDl will detect the existing torrent, show the existing GID, resume or monitor the existing task, and remove and re-add it if the existing task is errored.
+
+---
+
+## aria2 Status
+
+Use:
+
+```text
+Torrent Tools > aria2 status
+```
+
+This shows:
+
+```text
+GID
+Status
+Name
+InfoHash
+Progress
+Completed size
+Download speed
+Upload speed
+Uploaded size
+Ratio
+Connections
+Seeders
+Errors
+```
+
+---
+
+## Removing a Torrent Task
+
+Use:
+
+```text
+Torrent Tools > Remove aria2 GID
+```
+
+Then paste the GID shown in aria2 status.
+
+This can be useful when a torrent is stuck, duplicated, errored, or when you want to stop a seeding task.
 
 ---
 
 ## Batch Download
 
-Choose:
+Batch download allows multiple links to be downloaded one by one.
 
-```text
-6. Batch download
-```
+Supported in batch mode:
 
-Paste links one by one. Submit an empty line to start.
-
-Batch mode supports:
-
-- Magnet links
-- `.torrent` URLs
-- YouTube links
 - Direct links
+- YouTube links
+- Magnet links
+- `.torrent` links
+
+Unknown links are skipped.
 
 ---
 
-## Storage Report
+## Download History
 
-Choose:
+AzuDl stores download history in:
 
 ```text
-9. Storage report
+/content/drive/MyDrive/AzuDl-GC2GD/Logs/download_history.json
 ```
 
-It shows:
-
-- Total mounted storage
-- Used storage
-- Free storage
-- Size of each AzuDl project folder
+History includes type, source, output, status, time, format, seed mode, and error message.
 
 ---
 
-## SHA256
+## File Management Tools
 
-Choose:
-
-```text
-10. SHA256 latest file
-```
-
-or:
+AzuDl includes:
 
 ```text
-11. SHA256 selected file
+List downloaded files
+Show latest file
+Storage report
+SHA256 latest file
+SHA256 selected file
+ZIP folder
+ZIP latest folder
 ```
-
-SHA256 helps verify file integrity after download.
-
----
-
-## ZIP Tools
-
-Choose:
-
-```text
-12. ZIP folder
-```
-
-to zip a folder by path.
-
-Choose:
-
-```text
-13. ZIP latest folder
-```
-
-to zip the most recently modified downloaded folder.
 
 ZIP files are saved in:
 
@@ -419,163 +511,110 @@ ZIP files are saved in:
 
 ---
 
-## aria2 Tools
-
-Choose:
+## Speed Limit Examples
 
 ```text
-14. aria2 status
+500K
+2M
+10M
 ```
 
-to view active, waiting, and stopped aria2 tasks.
-
-Choose:
-
-```text
-15. Remove aria2 GID
-```
-
-to remove a task by GID.
-
-Choose:
-
-```text
-16. Clear stopped aria2 results
-```
-
-to clean old stopped results from aria2.
+Leave empty for no speed limit.
 
 ---
 
-## Download History
+## Requirements
 
-History is saved at:
+AzuDl installs required packages inside Colab:
 
-```text
-/content/drive/MyDrive/AzuDl-GC2GD/Logs/download_history.json
+```bash
+apt install -y aria2 ffmpeg p7zip-full
+pip install tqdm requests yt-dlp
 ```
 
-Example:
+| Tool | Purpose |
+|---|---|
+| aria2 | Direct, torrent, magnet downloads |
+| ffmpeg | YouTube merging and audio extraction |
+| yt-dlp | YouTube download engine |
+| tqdm | Progress bars |
+| requests | HTTP requests |
+| p7zip-full | Archive support |
 
-```json
-{
-  "type": "youtube",
-  "source": "https://www.youtube.com/watch?v=VIDEO_ID",
-  "output": "/content/drive/MyDrive/AzuDl-GC2GD/YouTubeDownloads/Example",
-  "format": "bv*+ba/best",
-  "status": "completed",
-  "time": "2026-05-06 18:30:00"
-}
+---
+
+## How to Use
+
+1. Open Google Colab: `https://colab.research.google.com`
+2. Create a new notebook.
+3. Paste the full AzuDl code into a cell.
+4. Run the cell.
+5. Authorize Google Drive mount.
+6. Choose an option from the menu.
+
+---
+
+## Recommended Usage
+
+For public torrent files:
+
+```text
+Torrent Tools > Torrent file
+```
+
+For private tracker torrents:
+
+```text
+Torrent Tools > Private torrent
+```
+
+For YouTube:
+
+```text
+YouTube video or playlist
+```
+
+For direct files:
+
+```text
+Direct link
+```
+
+For mixed links:
+
+```text
+Auto detect link
 ```
 
 ---
 
-## Installation
+## Legal Notice
 
-Paste the full source code into a Google Colab cell and run it.
-
-The code installs:
-
-```text
-aria2
-ffmpeg
-p7zip-full
-tqdm
-requests
-yt-dlp
-```
+Use AzuDl only for content that you have the right to download, store, or distribute. The developer is not responsible for misuse of this project. AzuDl is a downloader tool. Responsibility for the downloaded content belongs to the user.
 
 ---
 
-## Troubleshooting
+## Limitations
 
-### Google Drive mount failed
-
-Try:
-
-```text
-Runtime > Restart session
-```
-
-or run:
-
-```python
-from google.colab import drive
-drive.flush_and_unmount()
-```
-
-Then restart the runtime.
-
-Other fixes:
-
-- Use only one Google account in the browser
-- Open Colab in Incognito mode
-- Allow third-party cookies
-- Reconnect Google Drive manually from the Colab file panel
-
-### Torrent metadata downloads but real file does not start
-
-Possible reasons:
-
-- No seeders
-- Weak torrent
-- Metadata found but no peers available
-- Network restrictions
-
-Use:
-
-```text
-14. aria2 status
-```
-
-to inspect active, waiting, and stopped tasks.
-
-### YouTube download fails
-
-Try updating yt-dlp:
-
-```python
-!pip install -U yt-dlp
-```
-
-### Direct link fails
-
-Possible reasons:
-
-- Expired link
-- Missing headers
-- Server blocks Colab
-- Authentication required
-- Temporary token expired
-
-Try using custom headers JSON.
-
----
-
-## Responsible Use
-
-AzuDl is a downloader and file utility tool. Use it only for files and content you have permission to download, store, or process.
-
-Appropriate uses include:
-
-- Your own files
-- Open-source releases
-- Public domain content
-- Creative Commons content
-- Backups of your own data
-- Files shared with permission
-
-Do not use this tool to violate copyright, bypass access controls, or download unauthorized content.
+- Google Colab can disconnect at any time.
+- Colab is not suitable for permanent torrent seeding.
+- Some direct links require authentication.
+- Some websites block Colab IP addresses.
+- Some YouTube videos may require cookies or may not be available in Colab.
+- Private tracker seeding should be done on a VPS or seedbox for reliable long-term ratio.
+- Google Drive write speed may vary.
 
 ---
 
 ## Developer
 
-**Project:** AzuDl - GC2GD  
-**Full Name:** Azizi Universal Downloader - Google Colab to Google Drive  
-**Developer:** The Azizi
+```text
+Developer: The Azizi
+Project: AzuDl - GC2GD
+Full Name: Azizi Universal Downloader - Google Colab to Google Drive
+```
 
-### Links
+Links:
 
 - X: https://x.com/the_azzi
 - GitHub: https://github.com/TheGreatAzizi
@@ -585,8 +624,78 @@ Do not use this tool to violate copyright, bypass access controls, or download u
 
 ---
 
-## Version
+## Repository Description
 
 ```text
-Current version: 1.2.0
+AzuDl - GC2GD is a Google Colab based universal downloader for downloading direct links, YouTube videos, playlists, magnet links, torrent files, and private torrents directly to Google Drive with aria2 resume support, live progress, seeding status, batch downloads, history, ZIP tools, and SHA256 utilities.
+```
+
+---
+
+## Suggested Commit Message
+
+```text
+fix(torrent): detect duplicate infohash and resume existing aria2 task
+```
+
+Alternative:
+
+```text
+release: AzuDl GC2GD v1.2.8
+```
+
+---
+
+## Changelog
+
+### v1.2.8
+
+- Added torrent InfoHash detection before adding `.torrent` files
+- Added duplicate torrent detection
+- Added resume/monitor behavior for existing aria2 torrent tasks
+- Added automatic removal of existing errored torrent tasks
+- Improved aria2 status output with InfoHash
+- Kept dedicated Torrent Tools menu
+- Kept private torrent mode
+- Kept live seeding status
+- Kept aria2 session persistence
+- Kept YouTube audio format fix
+- Kept ZIP, SHA256, history, and file tools
+
+### v1.2.7
+
+- Fixed tqdm bool error during seeding status display
+
+### v1.2.6
+
+- Moved torrent features into a dedicated Torrent Tools menu
+
+### v1.2.5
+
+- Added live torrent seeding status
+- Added aria2 session persistence
+- Added resume-friendly aria2 settings
+
+### v1.2.4
+
+- Fixed invalid infinite seed-time issue
+- Replaced invalid `-1` seed time with long valid seed time
+
+### v1.2.3
+
+- Improved `.torrent` download validation
+- Improved aria2 RPC error messages
+
+---
+
+## License
+
+Choose the license that matches your repository policy.
+
+Recommended open-source options:
+
+```text
+MIT
+Apache-2.0
+GPL-3.0
 ```

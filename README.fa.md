@@ -1,160 +1,121 @@
 # AzuDl - GC2GD
 
-<p align="center">
-  <strong>فارسی</strong> · <a href="README.md">English</a>
-</p>
+**دانلودر یونیورسال عزیزی - از Google Colab به Google Drive**
 
-<p align="center">
-  <strong>Azizi Universal Downloader - Google Colab to Google Drive</strong>
-</p>
+AzuDl - GC2GD یک دانلودر حرفه‌ای بر پایه Google Colab است که فایل‌ها را مستقیماً روی Google Drive ذخیره می‌کند. این پروژه از لینک مستقیم، ویدیو و پلی‌لیست YouTube، مگنت تورنت، فایل `.torrent`، تورنت خصوصی، دانلود چندتایی، تاریخچه دانلود، ابزارهای مدیریت فایل، ساخت ZIP، هش SHA256، مانیتورینگ aria2، تشخیص تورنت تکراری، وضعیت زنده سید و ادامه دانلود با Session پشتیبانی می‌کند.
 
-<p align="center">
-  یک دانلودر و ابزار مدیریت فایل قدرتمند برای Google Colab که خروجی را مستقیم داخل Google Drive ذخیره می‌کند.
-</p>
-
-<p align="center">
-  <code>Google Colab</code> · <code>Google Drive</code> · <code>aria2</code> · <code>yt-dlp</code> · <code>FFmpeg</code> · <code>Python</code>
-</p>
+> English: [README.md](README.md)
 
 ---
 
-## معرفی
+## نسخه
 
-**AzuDl - GC2GD** مخفف عبارت زیر است:
-
-> **Azizi Universal Downloader - Google Colab to Google Drive**
-
-این پروژه یک ابزار دانلود برای Google Colab است که فایل‌ها و محتوای پشتیبانی‌شده را مستقیم داخل Google Drive ذخیره می‌کند.
-
-نسخه **1.2.0** نسخه کامل‌تر پروژه است و قابلیت‌هایی مثل مدیریت بهتر تورنت، پشتیبانی از فایل `.torrent`، هدر اختصاصی برای لینک مستقیم، ذخیره metadata و thumbnail یوتیوب، گزارش فضای Drive، محاسبه SHA256، ساخت ZIP و مدیریت aria2 به آن اضافه شده است.
-
----
-
-## برای کاربران عادی
-
-اگر می‌خواهی فایل‌ها را بدون روشن نگه داشتن سیستم شخصی دانلود کنی، این ابزار برای همین ساخته شده است.
-
-Google Colab را باز می‌کنی، کد را اجرا می‌کنی، Google Drive را وصل می‌کنی و لینک را وارد می‌کنی. فایل نهایی مستقیم داخل Drive ذخیره می‌شود.
-
-با AzuDl می‌توانی:
-
-- لینک مستقیم دانلود کنی
-- ویدیو از YouTube دانلود کنی
-- پلی‌لیست YouTube دانلود کنی
-- صدای YouTube را به MP3 تبدیل کنی
-- Magnet Torrent دانلود کنی
-- فایل `.torrent` دانلود کنی
-- چند لینک را پشت سر هم دانلود کنی
-- پوشه‌های دانلودشده را ZIP کنی
-- سلامت فایل را با SHA256 بررسی کنی
-
----
-
-## برای برنامه‌نویس‌ها
-
-هسته پروژه بر اساس یک کلاس پایتونی نوشته شده است:
-
-```python
-class AzuDlGC2GD:
+```text
+Version: 1.2.8
 ```
-
-این کلاس مدیریت می‌کند:
-
-- اتصال Google Drive
-- ساخت پوشه‌های پروژه
-- اجرای aria2 در حالت RPC
-- ارتباط با aria2 از طریق JSON-RPC
-- تشخیص metadata در Magnet
-- پیدا کردن GID واقعی تورنت بعد از metadata
-- بارگذاری فایل `.torrent` با `aria2.addTorrent`
-- دانلود لینک مستقیم با aria2
-- دانلود YouTube با `yt-dlp`
-- نمایش Progress با `tqdm.notebook`
-- ثبت تاریخچه دانلودها
-- گزارش فضای ذخیره‌سازی
-- محاسبه SHA256
-- ساخت ZIP
-- مدیریت taskهای aria2
 
 ---
 
 ## قابلیت‌ها
 
-### قابلیت‌های دانلود
-
-- دانلود Magnet Torrent
-- نمایش Progress واقعی تورنت بعد از metadata
-- دانلود فایل `.torrent` از URL یا مسیر لوکال
-- دانلود لینک مستقیم
-- پشتیبانی از Header اختصاصی برای لینک مستقیم
+- دانلود لینک مستقیم روی Google Drive
 - دانلود ویدیو از YouTube
 - دانلود پلی‌لیست YouTube
-- استخراج صدا از YouTube به MP3
-- انتخاب کیفیت YouTube
-- پشتیبانی از Custom Format ID
-- ذخیره اختیاری metadata و thumbnail برای YouTube
-- دانلود گروهی یا Batch Download
-- محدودیت سرعت برای دانلودهای aria2
-- پشتیبانی از ادامه دانلود
-
-### ابزارهای فایل
-
+- انتخاب کیفیت ویدیو
+- استخراج فایل صوتی MP3
+- پشتیبانی از Custom Format ID در YouTube
+- رفع خودکار مشکل فرمت‌های بی‌صدای YouTube
+- دانلود Magnet Torrent
+- دانلود فایل `.torrent` از لینک یا مسیر محلی
+- حالت تورنت خصوصی
+- قابلیت سید دادن بعد از دانلود
+- نمایش زنده پیشرفت دانلود تورنت
+- نمایش زنده وضعیت سید
+- نمایش سرعت آپلود هنگام سید
+- نمایش حجم آپلودشده هنگام سید
+- نمایش Ratio تورنت
+- نمایش تعداد Seeder و Connection
+- تشخیص InfoHash تکراری
+- ادامه دادن تورنت موجود به‌جای اضافه کردن Duplicate
+- حذف خودکار تورنت خطادار و اضافه کردن دوباره آن
+- ذخیره Session برای aria2
+- پشتیبانی بهتر از ادامه دانلود
+- تشخیص خودکار نوع لینک
+- دانلود چندتایی یا Batch Download
+- ذخیره تاریخچه دانلودها
 - نمایش فایل‌های دانلودشده
 - نمایش آخرین فایل دانلودشده
 - گزارش فضای Google Drive
-- گزارش حجم پوشه‌های پروژه
-- محاسبه SHA256 برای آخرین فایل
-- محاسبه SHA256 برای فایل انتخابی
-- ZIP کردن یک پوشه
-- ZIP کردن آخرین پوشه دانلودشده
-- ذخیره تاریخچه دانلودها
-
-### ابزارهای aria2
-
-- نمایش دانلودهای Active، Waiting و Stopped
-- حذف دانلود با GID
-- پاک‌سازی نتایج Stopped
-- نمایش بهتر وضعیت تورنت
-- نمایش درصد، سرعت، تعداد اتصال‌ها و Seederها
+- گرفتن SHA256 از فایل آخر یا فایل انتخابی
+- ساخت ZIP از پوشه
+- ساخت ZIP از آخرین پوشه دانلودشده
+- منوی جدا برای ابزارهای تورنت
+- بخش اطلاعات برنامه‌نویس
+- بخش Help داخلی
 
 ---
 
-## منوی برنامه
+## تغییرات مهم نسخه 1.2.8
+
+نسخه `1.2.8` بیشتر روی بهتر شدن بخش تورنت و مدیریت خطاهای تکراری تمرکز دارد.
+
+در این نسخه، AzuDl قبل از اضافه کردن فایل `.torrent` به aria2، مقدار `InfoHash` تورنت را می‌خواند. اگر همان تورنت قبلاً داخل aria2 ثبت شده باشد، تورنت دوباره اضافه نمی‌شود، GID قبلی شناسایی می‌شود، همان دانلود قبلی ادامه داده یا مانیتور می‌شود، و اگر تورنت قبلی خطا داشته باشد، حذف می‌شود و دوباره اضافه می‌شود.
+
+این قابلیت جلوی خطای رایج زیر را می‌گیرد:
+
+```text
+InfoHash is already registered
+```
+
+---
+
+## منوی اصلی
 
 ```text
 1. Auto detect link
-2. Torrent magnet
-3. Torrent file
-4. YouTube video or playlist
-5. Direct link
-6. Batch download
-7. Download history
-8. List downloaded files
-9. Storage report
-10. SHA256 latest file
-11. SHA256 selected file
-12. ZIP folder
-13. ZIP latest folder
-14. aria2 status
-15. Remove aria2 GID
-16. Clear stopped aria2 results
-17. Latest file
-18. Developer
-19. Help
-20. Exit
+2. Torrent tools
+3. YouTube video or playlist
+4. Direct link
+5. Batch download
+6. Download history
+7. List downloaded files
+8. Storage report
+9. SHA256 latest file
+10. SHA256 selected file
+11. ZIP folder
+12. ZIP latest folder
+13. Latest file
+14. Developer
+15. Help
+16. Exit
+```
+
+---
+
+## منوی Torrent Tools
+
+```text
+1. Torrent magnet
+2. Torrent file
+3. Private torrent
+4. aria2 status
+5. Remove aria2 GID
+6. Clear stopped aria2 results
+7. Save aria2 session
+8. Back
 ```
 
 ---
 
 ## ساختار پوشه‌ها
 
-پروژه این مسیر را داخل Google Drive می‌سازد:
+AzuDl داخل Google Drive این مسیر را می‌سازد:
 
 ```text
 /content/drive/MyDrive/AzuDl-GC2GD
 ```
 
-ساختار:
+ساختار داخلی:
 
 ```text
 AzuDl-GC2GD/
@@ -164,122 +125,122 @@ AzuDl-GC2GD/
 ├── BatchDownloads/
 ├── Archives/
 └── Logs/
-    └── download_history.json
 ```
 
 | پوشه | کاربرد |
 |---|---|
-| `TorrentDownloads` | دانلودهای Magnet و `.torrent` |
-| `YouTubeDownloads` | ویدیو، پلی‌لیست، صدا، metadata و thumbnail یوتیوب |
-| `DirectDownloads` | دانلودهای لینک مستقیم |
-| `BatchDownloads` | دانلودهای گروهی |
+| `TorrentDownloads` | دانلودهای تورنت، مگنت و فایل `.torrent` |
+| `YouTubeDownloads` | دانلودهای YouTube، پلی‌لیست و فایل صوتی |
+| `DirectDownloads` | دانلود لینک‌های مستقیم |
+| `BatchDownloads` | خروجی دانلودهای چندتایی |
 | `Archives` | فایل‌های ZIP ساخته‌شده |
-| `Logs` | تاریخچه دانلود و لاگ‌ها |
+| `Logs` | تاریخچه، فایل Session و فایل‌های Debug |
 
 ---
 
-## آپدیت مهم تورنت در v1.2.0
+## فایل Session برای aria2
 
-Magnet در aria2 چند مرحله دارد:
-
-```text
-Magnet link
-  ↓
-دریافت metadata
-  ↓
-ساخت task واقعی تورنت
-  ↓
-دانلود فایل اصلی
-```
-
-در نسخه‌های قبلی ممکن بود فقط metadata نمایش داده شود:
+AzuDl فایل Session مربوط به aria2 را اینجا ذخیره می‌کند:
 
 ```text
-Torrent: 100% 5.77k/5.77k
+/content/drive/MyDrive/AzuDl-GC2GD/Logs/aria2.session
 ```
 
-این فایل اصلی نبود؛ فقط metadata تورنت بود.
+این فایل کمک می‌کند aria2 بعد از اجرای دوباره نوت‌بوک، دانلودهای نیمه‌کاره را دوباره بشناسد.
 
-نسخه **1.2.0** بعد از دریافت metadata، `GID` واقعی دانلود تورنت را پیدا می‌کند و Progress فایل اصلی را نمایش می‌دهد.
-
-خروجی درست باید شبیه این باشد:
+AzuDl از تنظیمات زیر استفاده می‌کند:
 
 ```text
-Magnet added
-Metadata GID: ...
-Fetching metadata: 100%
-Metadata completed
-Real torrent GID: ...
-Starting torrent download monitor
-Torrent Download: ...
+--continue=true
+--always-resume=true
+--save-session
+--input-file
+--force-save=true
 ```
+
+این باعث می‌شود دانلودها تا حد ممکن قابل ادامه دادن باشند.
 
 ---
 
-## دانلود Magnet
+## نکته مهم درباره تایم‌اوت Google Colab
 
-از منو انتخاب کن:
+AzuDl تایم‌اوت Google Colab را دور نمی‌زند. Google Colab ممکن است بسته به شرایط، Runtime را قطع کند؛ مخصوصاً وقتی Runtime طولانی‌مدت یا Idle باشد.
 
-```text
-2. Torrent magnet
-```
+AzuDl فقط تلاش می‌کند دانلودها مقاوم‌تر باشند، با استفاده از ذخیره Session برای aria2، ذخیره فایل‌ها مستقیم روی Google Drive، فعال کردن Resume در aria2، تشخیص تورنت‌های تکراری و ادامه دادن تسک‌های قبلی aria2.
 
-بعد Magnet را وارد کن:
-
-```text
-magnet:?xt=urn:btih:EXAMPLE_HASH
-```
-
-نمونه محدودیت سرعت:
-
-```text
-500K
-2M
-10M
-```
+برای دانلودهای طولانی‌مدت یا سید دائمی تورنت، بهتر است از VPS یا Seedbox استفاده شود.
 
 ---
 
-## دانلود فایل torrent
+## لینک‌های پشتیبانی‌شده
 
-از منو انتخاب کن:
-
-```text
-3. Torrent file
-```
-
-می‌توانی URL فایل `.torrent` را بدهی:
+AzuDl می‌تواند این نوع لینک‌ها را تشخیص دهد:
 
 ```text
+magnet:?...
+https://example.com/file.zip
 https://example.com/file.torrent
+https://youtube.com/...
+https://youtu.be/...
 ```
 
-یا مسیر فایل داخل Colab/Drive را وارد کنی:
+| نوع لینک | پشتیبانی |
+|---|---|
+| لینک مستقیم HTTP/HTTPS | دارد |
+| لینک FTP | دارد |
+| ویدیو YouTube | دارد |
+| پلی‌لیست YouTube | دارد |
+| Magnet | دارد |
+| فایل `.torrent` از URL | دارد |
+| فایل `.torrent` محلی | دارد |
+| دانلود چندتایی | دارد |
+
+---
+
+## دانلود لینک مستقیم
+
+AzuDl لینک‌های مستقیم را با aria2 دانلود می‌کند.
+
+مثال:
 
 ```text
-/content/drive/MyDrive/file.torrent
+https://example.com/file.zip
+https://example.com/video.mp4
+https://example.com/archive.rar
+https://example.com/document.pdf
+```
+
+گزینه‌های اختیاری:
+
+- نام پوشه
+- نام فایل خروجی
+- محدودیت سرعت
+- Header اختصاصی به صورت JSON
+
+نمونه Header:
+
+```json
+{"User-Agent":"Mozilla/5.0","Referer":"https://example.com"}
 ```
 
 ---
 
 ## دانلود از YouTube
 
-از منو انتخاب کن:
+AzuDl برای دانلود از YouTube از `yt-dlp` استفاده می‌کند.
 
-```text
-4. YouTube video or playlist
-```
+قابلیت‌ها:
 
-نمونه لینک‌ها:
+- دانلود با بهترین کیفیت
+- محدود کردن کیفیت
+- دانلود فقط صدا
+- تبدیل صدا به MP3
+- دانلود پلی‌لیست
+- انتخاب Custom Format ID
+- ذخیره Metadata
+- ذخیره Thumbnail
 
-```text
-https://www.youtube.com/watch?v=VIDEO_ID
-https://youtu.be/VIDEO_ID
-https://www.youtube.com/playlist?list=PLAYLIST_ID
-https://music.youtube.com/watch?v=VIDEO_ID
-```
-
-کیفیت‌های آماده:
+کیفیت‌های قابل انتخاب:
 
 ```text
 best
@@ -292,7 +253,27 @@ best
 360
 ```
 
-نمونه Custom Format:
+---
+
+## رفع مشکل بی‌صدا بودن ویدیوهای YouTube
+
+بعضی از فرمت‌های YouTube، مخصوصاً کیفیت‌های بالا، فقط تصویر هستند و صدا ندارند.
+
+مثلاً:
+
+```text
+137
+```
+
+معمولاً فقط ویدیو است.
+
+AzuDl به‌صورت خودکار تلاش می‌کند بهترین صدای موجود را به آن اضافه کند:
+
+```text
+137 -> 137+ba/best
+```
+
+نمونه‌های بهتر برای Custom Format:
 
 ```text
 137+140
@@ -302,113 +283,258 @@ best
 best
 ```
 
-در حالت Audio Only خروجی MP3 ذخیره می‌شود.  
-در حالت metadata، فایل `.info.json` و thumbnail هم ذخیره می‌شود.
-
 ---
 
-## دانلود لینک مستقیم
+## استخراج MP3
 
-از منو انتخاب کن:
-
-```text
-5. Direct link
-```
-
-پروتکل‌های پشتیبانی‌شده:
+برای دانلود فقط صدا، در زمان سؤال زیر:
 
 ```text
-http://
-https://
-ftp://
+Audio only? y/n
 ```
 
-گزینه‌های اختیاری:
+گزینه زیر را وارد کنید:
 
 ```text
-Folder name
-File name
-Speed limit
-Headers JSON
+y
 ```
 
-نمونه Header:
+خروجی به شکل زیر ساخته می‌شود:
 
-```json
-{"User-Agent":"Mozilla/5.0","Referer":"https://example.com"}
+```text
+MP3 320kbps
 ```
 
 ---
 
-## دانلود گروهی
+## دانلود تورنت
 
-از منو انتخاب کن:
+AzuDl از این حالت‌ها پشتیبانی می‌کند:
+
+- Magnet link
+- فایل `.torrent` از URL
+- فایل `.torrent` محلی
+- حالت تورنت خصوصی
+- سید دادن اختیاری
+- نمایش پیشرفت دانلود
+- نمایش وضعیت سید
+- تشخیص InfoHash تکراری
+- ادامه دانلود با aria2 Session
+
+### نمونه Magnet
 
 ```text
-6. Batch download
+magnet:?xt=urn:btih:EXAMPLE_HASH
 ```
 
-لینک‌ها را یکی‌یکی وارد کن. با خط خالی، دانلود شروع می‌شود.
+مسیر استفاده:
 
-Batch از این لینک‌ها پشتیبانی می‌کند:
+```text
+Torrent Tools > Torrent magnet
+```
 
+### نمونه فایل Torrent
+
+```text
+https://example.com/file.torrent
+```
+
+مسیر استفاده:
+
+```text
+Torrent Tools > Torrent file
+```
+
+برای تورنت‌های عمومی، گزینه `Torrent file` مناسب‌تر است، نه `Private torrent`.
+
+---
+
+## حالت Private Torrent
+
+حالت Private Torrent برای ترکرهای خصوصی ساخته شده است.
+
+مسیر استفاده:
+
+```text
+Torrent Tools > Private torrent
+```
+
+ورودی پیشنهادی:
+
+```text
+فایل .torrent اختصاصی از ترکر خصوصی
+```
+
+در حالت خصوصی، این موارد خاموش می‌شوند:
+
+```text
+DHT
+DHT6
+PEX
+LPD
+```
+
+این کار برای ترکرهای خصوصی مهم است، چون خیلی از ترکرهای خصوصی اجازه Peer Discovery عمومی را نمی‌دهند.
+
+---
+
+## سید دادن
+
+وقتی AzuDl می‌پرسد:
+
+```text
+Keep seeding after download? y/n
+```
+
+اگر می‌خواهید بعد از دانلود سید بدهد، وارد کنید:
+
+```text
+y
+```
+
+AzuDl وضعیت سید را زنده نمایش می‌دهد:
+
+```text
+سرعت آپلود
+حجم آپلودشده
+Ratio
+تعداد Connection
+تعداد Seeder
+زمان سپری‌شده سید
+```
+
+نمونه خروجی:
+
+```text
+Seeding Upload: up=1.20 MB/s, uploaded=350.40 MB, ratio=0.42, connections=8, seeders=12, time=08:31
+```
+
+سید فقط تا زمانی ادامه دارد که Runtime گوگل کلب روشن باشد. برای سید طولانی‌مدت، بهتر است از VPS، Seedbox یا Dedicated Server استفاده شود.
+
+---
+
+## چرا برای Seed Time عدد 525600 استفاده شده؟
+
+بعضی نسخه‌های aria2 مقدار زیر را قبول نمی‌کنند:
+
+```text
+seed-time=-1
+```
+
+برای همین AzuDl از این مقدار استفاده می‌کند:
+
+```text
+525600
+```
+
+یعنی 525600 دقیقه، تقریباً یک سال. از آنجا که Colab خیلی زودتر از یک سال قطع می‌شود، این مقدار در عمل یعنی تا وقتی Runtime روشن است سید بده.
+
+---
+
+## تشخیص تورنت تکراری
+
+AzuDl قبل از اضافه کردن فایل `.torrent`، مقدار InfoHash را می‌خواند.
+
+اگر همان تورنت قبلاً داخل aria2 وجود داشته باشد، AzuDl این کارها را انجام می‌دهد:
+
+- تورنت موجود را تشخیص می‌دهد
+- GID موجود را نمایش می‌دهد
+- همان تسک قبلی را ادامه یا مانیتور می‌کند
+- اگر تسک قبلی خطادار باشد، آن را حذف می‌کند و تورنت را دوباره اضافه می‌کند
+
+این باعث می‌شود اجرای دوباره یک تورنت باعث Duplicate و خطای aria2 نشود.
+
+---
+
+## وضعیت aria2
+
+مسیر:
+
+```text
+Torrent Tools > aria2 status
+```
+
+این بخش اطلاعات زیر را نمایش می‌دهد:
+
+```text
+GID
+Status
+Name
+InfoHash
+Progress
+Completed size
+Download speed
+Upload speed
+Uploaded size
+Ratio
+Connections
+Seeders
+Errors
+```
+
+---
+
+## حذف یک تسک تورنت
+
+مسیر:
+
+```text
+Torrent Tools > Remove aria2 GID
+```
+
+بعد GID موردنظر را وارد کنید.
+
+این قابلیت برای موارد زیر کاربرد دارد:
+
+- تورنت گیر کرده
+- تورنت تکراری ثبت شده
+- تورنت خطا دارد
+- می‌خواهید سید را متوقف کنید
+
+---
+
+## دانلود چندتایی
+
+Batch Download اجازه می‌دهد چند لینک را پشت سر هم وارد کنید.
+
+در حالت Batch این لینک‌ها پشتیبانی می‌شوند:
+
+- لینک مستقیم
+- لینک YouTube
 - Magnet
 - فایل `.torrent`
-- YouTube
-- لینک مستقیم
+
+لینک‌های ناشناخته رد می‌شوند.
 
 ---
 
-## گزارش فضای ذخیره‌سازی
+## تاریخچه دانلود
 
-از منو انتخاب کن:
+AzuDl تاریخچه دانلودها را اینجا ذخیره می‌کند:
 
 ```text
-9. Storage report
+/content/drive/MyDrive/AzuDl-GC2GD/Logs/download_history.json
 ```
 
-نمایش می‌دهد:
-
-- کل فضای Mount شده
-- فضای استفاده‌شده
-- فضای آزاد
-- حجم هر پوشه پروژه
+تاریخچه شامل نوع دانلود، لینک منبع، مسیر خروجی، وضعیت، زمان، فرمت، حالت سید و خطا است.
 
 ---
 
-## SHA256
+## ابزارهای مدیریت فایل
 
-برای آخرین فایل:
-
-```text
-10. SHA256 latest file
-```
-
-برای انتخاب فایل:
+AzuDl ابزارهای ساده برای مدیریت فایل دارد:
 
 ```text
-11. SHA256 selected file
+نمایش فایل‌های دانلودشده
+نمایش آخرین فایل
+گزارش فضای Google Drive
+SHA256 فایل آخر
+SHA256 فایل انتخابی
+ZIP کردن پوشه
+ZIP کردن آخرین پوشه دانلودشده
 ```
 
-SHA256 برای بررسی سلامت فایل بعد از دانلود کاربرد دارد.
-
----
-
-## ابزار ZIP
-
-برای ZIP کردن یک پوشه:
-
-```text
-12. ZIP folder
-```
-
-برای ZIP کردن آخرین پوشه دانلودشده:
-
-```text
-13. ZIP latest folder
-```
-
-خروجی‌ها اینجا ذخیره می‌شوند:
+خروجی ZIP در این مسیر ذخیره می‌شود:
 
 ```text
 /content/drive/MyDrive/AzuDl-GC2GD/Archives
@@ -416,156 +542,110 @@ SHA256 برای بررسی سلامت فایل بعد از دانلود کارب
 
 ---
 
-## ابزارهای aria2
-
-برای مشاهده وضعیت دانلودها:
+## نمونه محدودیت سرعت
 
 ```text
-14. aria2 status
+500K
+2M
+10M
 ```
 
-برای حذف یک دانلود با GID:
+اگر نمی‌خواهید محدودیت سرعت بگذارید، خالی بگذارید.
 
-```text
-15. Remove aria2 GID
+---
+
+## پیش‌نیازها
+
+AzuDl داخل Colab پکیج‌های لازم را نصب می‌کند:
+
+```bash
+apt install -y aria2 ffmpeg p7zip-full
+pip install tqdm requests yt-dlp
 ```
 
-برای پاک‌سازی نتایج متوقف‌شده:
+| ابزار | کاربرد |
+|---|---|
+| aria2 | دانلود لینک مستقیم، مگنت و تورنت |
+| ffmpeg | ادغام ویدیو و صدا و استخراج MP3 |
+| yt-dlp | موتور دانلود YouTube |
+| tqdm | نمایش نوار پیشرفت |
+| requests | درخواست‌های HTTP |
+| p7zip-full | پشتیبانی از آرشیو |
+
+---
+
+## روش استفاده
+
+1. وارد Google Colab شوید: `https://colab.research.google.com`
+2. یک Notebook جدید بسازید.
+3. کد کامل AzuDl را داخل یک Cell قرار دهید.
+4. Cell را اجرا کنید.
+5. اجازه اتصال Google Drive را بدهید.
+6. از منوی برنامه گزینه موردنظر را انتخاب کنید.
+
+---
+
+## پیشنهاد استفاده
+
+برای تورنت عمومی:
 
 ```text
-16. Clear stopped aria2 results
+Torrent Tools > Torrent file
+```
+
+برای ترکر خصوصی:
+
+```text
+Torrent Tools > Private torrent
+```
+
+برای YouTube:
+
+```text
+YouTube video or playlist
+```
+
+برای لینک مستقیم:
+
+```text
+Direct link
+```
+
+برای تشخیص خودکار:
+
+```text
+Auto detect link
 ```
 
 ---
 
-## تاریخچه دانلودها
+## نکته قانونی
 
-تاریخچه اینجا ذخیره می‌شود:
-
-```text
-/content/drive/MyDrive/AzuDl-GC2GD/Logs/download_history.json
-```
-
-نمونه:
-
-```json
-{
-  "type": "youtube",
-  "source": "https://www.youtube.com/watch?v=VIDEO_ID",
-  "output": "/content/drive/MyDrive/AzuDl-GC2GD/YouTubeDownloads/Example",
-  "format": "bv*+ba/best",
-  "status": "completed",
-  "time": "2026-05-06 18:30:00"
-}
-```
+از AzuDl فقط برای دانلود، ذخیره یا توزیع محتوایی استفاده کنید که حق استفاده از آن را دارید. مسئولیت استفاده از پروژه و محتوای دانلودشده با کاربر است. AzuDl فقط یک ابزار دانلود است و مسئولیتی در قبال سوءاستفاده از آن ندارد.
 
 ---
 
-## نصب و اجرا
+## محدودیت‌ها
 
-کل سورس پروژه را داخل یک سلول Google Colab قرار بده و اجرا کن.
-
-وابستگی‌ها:
-
-```text
-aria2
-ffmpeg
-p7zip-full
-tqdm
-requests
-yt-dlp
-```
-
----
-
-## رفع خطاهای رایج
-
-### Google Drive وصل نمی‌شود
-
-اول Runtime را Restart کن:
-
-```text
-Runtime > Restart session
-```
-
-یا اجرا کن:
-
-```python
-from google.colab import drive
-drive.flush_and_unmount()
-```
-
-بعد دوباره Runtime را Restart کن.
-
-راهکارهای دیگر:
-
-- فقط با یک اکانت گوگل وارد باش
-- از Incognito استفاده کن
-- Third-party cookies را فعال کن
-- Drive را از پنل فایل‌های Colab دوباره وصل کن
-
-### تورنت metadata می‌گیرد ولی دانلود اصلی شروع نمی‌شود
-
-دلایل احتمالی:
-
-- Seeder ندارد
-- Peer کافی پیدا نشده
-- تورنت ضعیف است
-- محدودیت شبکه وجود دارد
-
-برای بررسی:
-
-```text
-14. aria2 status
-```
-
-### YouTube دانلود نمی‌شود
-
-برای آپدیت yt-dlp:
-
-```python
-!pip install -U yt-dlp
-```
-
-### لینک مستقیم دانلود نمی‌شود
-
-دلایل احتمالی:
-
-- لینک منقضی شده
-- Header نیاز دارد
-- سرور Colab را بلاک کرده
-- Authentication لازم دارد
-- Token موقت تمام شده
-
-در این حالت Headers JSON را امتحان کن.
-
----
-
-## استفاده مسئولانه
-
-AzuDl فقط یک ابزار دانلود و مدیریت فایل است.  
-از آن فقط برای فایل‌ها و محتواهایی استفاده کن که اجازه دانلود، ذخیره یا پردازش آن‌ها را داری.
-
-نمونه‌های مناسب:
-
-- فایل‌های شخصی
-- پروژه‌های Open Source
-- محتوای Public Domain
-- محتوای Creative Commons
-- بکاپ اطلاعات خودت
-- فایل‌هایی که صاحب اثر اجازه دانلودشان را داده
-
-از این ابزار برای نقض کپی‌رایت، دور زدن محدودیت دسترسی یا دانلود محتوای غیرمجاز استفاده نکن.
+- Google Colab ممکن است هر زمان Runtime را قطع کند.
+- Colab برای سید دائمی تورنت مناسب نیست.
+- بعضی لینک‌های مستقیم نیاز به احراز هویت دارند.
+- بعضی سایت‌ها IPهای Colab را محدود یا بلاک می‌کنند.
+- بعضی ویدیوهای YouTube ممکن است در Colab قابل دریافت نباشند.
+- برای Ratio واقعی در ترکرهای خصوصی، VPS یا Seedbox بهتر است.
+- سرعت نوشتن روی Google Drive ممکن است متغیر باشد.
 
 ---
 
 ## برنامه‌نویس
 
-**Project:** AzuDl - GC2GD  
-**Full Name:** Azizi Universal Downloader - Google Colab to Google Drive  
-**Developer:** The Azizi
+```text
+Developer: The Azizi
+Project: AzuDl - GC2GD
+Full Name: Azizi Universal Downloader - Google Colab to Google Drive
+```
 
-### لینک‌ها
+لینک‌ها:
 
 - X: https://x.com/the_azzi
 - GitHub: https://github.com/TheGreatAzizi
@@ -575,8 +655,78 @@ AzuDl فقط یک ابزار دانلود و مدیریت فایل است.
 
 ---
 
-## نسخه
+## توضیح کوتاه برای Repository
 
 ```text
-Current version: 1.2.0
+AzuDl - GC2GD یک دانلودر یونیورسال بر پایه Google Colab است که لینک مستقیم، YouTube، پلی‌لیست، Magnet، فایل Torrent و تورنت خصوصی را مستقیم روی Google Drive دانلود می‌کند و از ادامه دانلود، وضعیت زنده دانلود و سید، Batch Download، تاریخچه، ZIP و SHA256 پشتیبانی می‌کند.
+```
+
+---
+
+## پیام Commit پیشنهادی
+
+```text
+fix(torrent): detect duplicate infohash and resume existing aria2 task
+```
+
+یا:
+
+```text
+release: AzuDl GC2GD v1.2.8
+```
+
+---
+
+## تغییرات نسخه‌ها
+
+### v1.2.8
+
+- اضافه شدن تشخیص InfoHash قبل از اضافه کردن فایل `.torrent`
+- اضافه شدن تشخیص تورنت تکراری
+- ادامه دادن یا مانیتور کردن تسک موجود aria2 به‌جای ساخت Duplicate
+- حذف خودکار تورنت خطادار و اضافه کردن دوباره آن
+- بهتر شدن خروجی aria2 status با نمایش InfoHash
+- حفظ منوی جدا برای Torrent Tools
+- حفظ حالت Private Torrent
+- حفظ نمایش زنده وضعیت سید
+- حفظ Session Persistence برای aria2
+- حفظ فیکس صدای YouTube
+- حفظ ابزارهای ZIP، SHA256، تاریخچه و مدیریت فایل
+
+### v1.2.7
+
+- رفع خطای tqdm هنگام نمایش وضعیت سید
+
+### v1.2.6
+
+- انتقال گزینه‌های تورنت به منوی جداگانه Torrent Tools
+
+### v1.2.5
+
+- اضافه شدن نمایش زنده وضعیت سید
+- اضافه شدن Session Persistence برای aria2
+- بهتر شدن قابلیت ادامه دانلود
+
+### v1.2.4
+
+- رفع مشکل seed-time نامعتبر
+- جایگزینی `-1` با مقدار معتبر طولانی برای سید
+
+### v1.2.3
+
+- بهبود اعتبارسنجی فایل `.torrent`
+- بهبود پیام‌های خطای aria2 RPC
+
+---
+
+## لایسنس
+
+لایسنسی را انتخاب کنید که با سیاست Repository شما هماهنگ است.
+
+گزینه‌های پیشنهادی:
+
+```text
+MIT
+Apache-2.0
+GPL-3.0
 ```
