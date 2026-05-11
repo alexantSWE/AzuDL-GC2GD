@@ -929,13 +929,6 @@ feat(gui): add Colab widget interface beta
 ---
 
 ## License
-
-Choose the license that matches your repository policy.
-
-Recommended open-source options:
-
 ```text
 MIT
-Apache-2.0
-GPL-3.0
 ```
