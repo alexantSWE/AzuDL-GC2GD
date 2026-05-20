@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to **AzuDl - GC2GD**.
 
-AzuDl - GC2GD is a Google Colab based universal downloader that saves supported downloads directly to Google Drive. It supports direct links, YouTube videos and playlists, torrent magnet links, `.torrent` files, private torrent mode, batch downloads, history, ZIP tools, SHA256 tools, aria2 status monitoring, seeding status, duplicate torrent detection, and a Colab GUI beta.
+AzuDl - GC2GD is a Google Colab based universal downloader that saves supported downloads directly to Google Drive. It supports direct links, YouTube videos and playlists, torrent magnet links, `.torrent` files, private torrent mode, batch downloads, history, ZIP tools, SHA256 tools, aria2 status monitoring, seeding status, duplicate torrent detection, and a Colab GUI beta, GitHub repository downloader, Official project downloader, diagnostics, and verified Google Drive transfer workflow.
 
 Contributions are welcome, especially bug fixes, documentation improvements, UI improvements, Colab compatibility fixes, and safer user experience improvements.
 
@@ -26,17 +26,21 @@ Make sure your change matches the purpose of the project.
 You can help by:
 
 - Reporting bugs
-- Improving the GUI
+- Improving the GUI, mobile layout, or button design
 - Improving README or Persian documentation
 - Improving help text
 - Fixing Colab compatibility issues
 - Improving YouTube download handling
 - Improving torrent handling
 - Improving aria2 session handling
-- Improving error messages
+- Improving GitHub downloader behavior
+- Improving Official project repository behavior
+- Improving Google Drive transfer verification
+- Improving system diagnostic checks
+- Improving error messages and diagnostic output
 - Adding safer defaults
 - Adding screenshots or examples
-- Testing on Google Colab
+- Testing on Google Colab, including Run diagnostic
 
 ---
 
@@ -53,6 +57,7 @@ youtube_cookies.txt
 *.cookies
 youtube_po_token.txt
 youtube_visitor_data.txt
+github_token.txt
 aria2_rpc_secret.txt
 aria2.session
 download_history.json
@@ -101,7 +106,7 @@ The script installs or checks these tools automatically inside Colab.
 
 ### GUI mode
 
-The default interface in `1.3.0 GUI Beta` is the GUI.
+The default interface in `1.4.20 GUI Beta` is the GUI.
 
 ```python
 launch_gui()
@@ -147,7 +152,9 @@ Examples:
 
 | Change Type | Suggested Test |
 |---|---|
-| GUI layout | Launch GUI and check all tabs |
+| GUI layout | Launch GUI and check all tabs, including GitHub and Official |
+| Diagnostic | Run the Maintenance diagnostic test |
+| Drive transfer | Confirm files appear under `/content/drive/MyDrive/AzuDl-GC2GD` |
 | Direct download | Test a small public direct file |
 | YouTube | Test a public short video |
 | Torrent | Test only legal public torrents |
@@ -275,3 +282,33 @@ chore: update changelog
 ## License
 
 By contributing to this project, you agree that your contribution will be released under the same license as the repository.
+
+---
+
+## GitHub and Official Downloader Testing
+
+When changing GitHub-related code, test:
+
+1. Repository info fetch.
+2. Latest release mode.
+3. Default branch source mode.
+4. Optional README download.
+5. Optional GitHub token save, status, and clear actions.
+6. Official tab download for `https://github.com/TheGreatAzizi/AzuDL-GC2GD`.
+
+Do not use or publish real private repository tokens in test logs.
+
+---
+
+## Diagnostic Testing
+
+Before submitting UI or download-engine changes, run **Run diagnostic** from the Maintenance tab when possible.
+
+The diagnostic checks:
+
+- Direct download access
+- GitHub API access
+- YouTube metadata access
+- aria2 torrent engine startup
+
+If a diagnostic check fails because of a known external restriction such as YouTube bot-check or GitHub rate-limit, mention that in the pull request.

@@ -11,13 +11,24 @@ AzuDl - GC2GD is a Google Colab based universal downloader that downloads suppor
 ## Version
 
 ```text
-Version: 1.3.0 GUI Beta
+Version: 1.4.20 GUI Beta
 ```
 
 ---
 
 ## Features
 
+- GitHub repository downloader
+- Official project repository downloader
+- GitHub token field and rate-limit status
+- Specific GitHub release tag download
+- GitHub release assets and source archive download
+- GitHub README and license download options
+- Verified Google Drive transfer workflow
+- Force Drive sync tool
+- System diagnostic tool
+- Mobile-friendly GUI tabs
+- Improved role-based button colors
 - Colab GUI beta interface
 - Tab-based dashboard
 - Direct link download to Google Drive
@@ -57,18 +68,18 @@ Version: 1.3.0 GUI Beta
 
 ---
 
-## <img src="https://img.shields.io/badge/v1.3.0-GUI%20Beta-5865F2?style=for-the-badge" alt="v1.3.0 GUI Beta">
+## <img src="https://img.shields.io/badge/v1.4.20-GUI%20Beta-5865F2?style=for-the-badge" alt="1.4.20 GUI Beta">
 
 > [!IMPORTANT]
-> `v1.3.0 GUI Beta` introduces the first Colab graphical interface for **AzuDl - GC2GD**.  
+> `1.4.20 GUI Beta` introduces the first Colab graphical interface for **AzuDl - GC2GD**.  
 > The classic CLI is still available, but the default experience is now the GUI.
 
 <details>
-<summary><strong>What is new in v1.3.0 GUI Beta?</strong></summary>
+<summary><strong>What is new in 1.4.20 GUI Beta?</strong></summary>
 
 <br>
 
-Version `1.3.0 GUI Beta` adds a new Google Colab widget-based graphical interface for AzuDl - GC2GD.
+Version `1.4.20 GUI Beta` adds a new Google Colab widget-based graphical interface for AzuDl - GC2GD.
 
 This beta release keeps the original CLI workflow available, but adds a tab-based GUI for users who prefer buttons, forms, dropdowns, checkboxes, and visual controls instead of typing menu numbers.
 
@@ -104,7 +115,7 @@ The GUI is designed to make AzuDl easier to use for public GitHub users, especia
 
 <br>
 
-Starting from `1.3.0 GUI Beta`, the default interface is the GUI.
+Starting from `1.4.20 GUI Beta`, the default interface is the GUI.
 
 When the notebook cell is run normally, AzuDl launches the Colab GUI automatically:
 
@@ -137,8 +148,11 @@ Dashboard
 Auto
 Direct
 YouTube
+Auth
 Torrent
 Batch
+GitHub
+Official
 Files
 Archives
 Maintenance
@@ -165,13 +179,13 @@ The GUI may receive visual improvements, layout changes, and usability updates i
 <br>
 
 ```text
-release: AzuDl GC2GD v1.3.0 GUI Beta
+release: AzuDl GC2GD 1.4.20 GUI Beta
 ```
 
 Alternative:
 
 ```text
-feat(gui): add Colab widget interface beta
+feat(gui): add GitHub downloader diagnostics and verified Drive transfer
 ```
 
 </details>
@@ -226,8 +240,11 @@ Dashboard
 Auto
 Direct
 YouTube
+Auth
 Torrent
 Batch
+GitHub
+Official
 Files
 Archives
 Maintenance
@@ -245,7 +262,9 @@ Guide
 | Batch | Download multiple links one by one |
 | Files | List downloads, view latest file, and calculate SHA256 |
 | Archives | Create ZIP archives |
-| Maintenance | Save aria2 session, remove GID, clear stopped tasks, and check storage |
+| GitHub | Download public or private GitHub repository releases, assets, source archives, README, and license files |
+| Official | Download the official AzuDl project repository without entering the URL manually |
+| Maintenance | Save aria2 session, remove GID, clear stopped tasks, force Drive sync, run diagnostics, and check storage |
 | Developer | Show project and developer links |
 | Guide | Show help, cookie help, and PO Token help |
 
@@ -265,6 +284,7 @@ AzuDl-GC2GD/
 ├── YouTubeDownloads/
 ├── DirectDownloads/
 ├── BatchDownloads/
+├── GitHubDownloads/
 ├── Archives/
 └── Logs/
 ```
@@ -275,10 +295,101 @@ AzuDl-GC2GD/
 | `YouTubeDownloads` | YouTube video, playlist, and audio downloads |
 | `DirectDownloads` | Direct URL downloads |
 | `BatchDownloads` | Batch download outputs |
+| `GitHubDownloads` | GitHub repository, release, asset, and official project downloads |
 | `Archives` | ZIP files created by AzuDl |
 | `Logs` | History, aria2 session file, cookies templates, token templates, and debug files |
 
 ---
+
+
+---
+
+## GitHub Repository Downloader
+
+The GitHub tab can fetch repository information and download files directly to Google Drive.
+
+Supported repository input:
+
+```text
+https://github.com/owner/repository
+```
+
+Supported download modes:
+
+| Mode | Description |
+|---|---|
+| Latest release | Downloads assets and optional source archives from the newest release |
+| Specific release tag | Downloads assets and optional source archives from a selected tag |
+| All releases | Downloads assets and optional source archives from all returned releases |
+| Default branch source | Downloads the default branch ZIP archive |
+
+Optional GitHub downloads:
+
+- Release assets
+- Source ZIP/TAR archives
+- README
+- License candidates
+
+For private repositories or higher API limits, paste a GitHub token in the GitHub tab and click **Save token**.
+
+AzuDl stores the optional token template at:
+
+```text
+/content/drive/MyDrive/AzuDl-GC2GD/Logs/github_token.txt
+```
+
+Environment variable alternative:
+
+```text
+AZUDL_GITHUB_TOKEN
+```
+
+Never share or commit a real GitHub token.
+
+---
+
+## Official Project Repository
+
+The Official tab is dedicated to the AzuDl project repository:
+
+```text
+https://github.com/TheGreatAzizi/AzuDL-GC2GD
+```
+
+It can download official releases, release assets, source archives, README, license files, or the default branch source ZIP.
+
+If no release asset is available, AzuDl can fall back to the default branch source ZIP.
+
+---
+
+## System Diagnostic
+
+The Maintenance tab includes **Run diagnostic**.
+
+It checks:
+
+- Direct download access
+- GitHub API access
+- YouTube metadata access
+- aria2 torrent engine startup
+
+This is useful after launching a fresh Colab runtime to confirm that the main engines are working before testing downloads manually.
+
+---
+
+## Google Drive Transfer Verification
+
+AzuDl uses verified transfer logic for files that are processed locally before being saved to Google Drive.
+
+The workflow includes:
+
+1. Download or process files in local Colab temporary storage when needed.
+2. Copy files to Google Drive in chunks.
+3. Flush and `fsync` the written file.
+4. Run a system sync.
+5. Re-open and verify the final file on the mounted Drive path.
+
+If the Google Drive web or mobile app does not show the file immediately, refresh Drive or wait for sync. The Maintenance tab includes **Force Drive sync**.
 
 ## aria2 Session File
 
@@ -286,6 +397,7 @@ AzuDl stores aria2 session data here:
 
 ```text
 /content/drive/MyDrive/AzuDl-GC2GD/Logs/aria2.session
+download_history.json
 ```
 
 This file helps aria2 reload unfinished tasks after restarting the notebook.
@@ -805,11 +917,13 @@ cookies.txt
 youtube_cookies.txt
 youtube_po_token.txt
 youtube_visitor_data.txt
+github_token.txt
 *_cookies.txt
 *.cookies
 *.token
 aria2_rpc_secret.txt
 aria2.session
+download_history.json
 ```
 
 ---
@@ -862,20 +976,20 @@ AzuDl - GC2GD is a Google Colab based universal downloader for downloading direc
 ## Suggested Commit Message
 
 ```text
-release: AzuDl GC2GD v1.3.0 GUI Beta
+release: AzuDl GC2GD 1.4.20 GUI Beta
 ```
 
 Alternative:
 
 ```text
-feat(gui): add Colab widget interface beta
+feat(gui): add GitHub downloader diagnostics and verified Drive transfer
 ```
 
 ---
 
 ## Changelog
 
-### v1.3.0 GUI Beta
+### 1.4.20 GUI Beta
 
 - Added Colab widget-based GUI beta
 - Added tab-based dashboard
@@ -887,6 +1001,19 @@ feat(gui): add Colab widget interface beta
 - Kept classic CLI available
 - Set GUI as the default interface
 - Improved public GitHub usability for new users
+
+### v1.4.20 GUI Beta
+
+- Added GitHub repository downloader
+- Added Official project repository downloader
+- Added GitHub token field, token status, and rate-limit display
+- Added latest release, all releases, release tag, and default branch source download modes
+- Added README and license download options for GitHub repositories
+- Added verified Google Drive transfer workflow with chunked copy, fsync, sync, and visibility checks
+- Added Force Drive sync tool
+- Added Run diagnostic tool
+- Improved GUI buttons, mobile tabs, Maintenance layout, and public user-facing text
+- Fixed GitHub token recursion, GitHub info recursion, Official repo recursion, handler mismatches, and Diagnostic button visibility
 
 ### v1.2.8
 

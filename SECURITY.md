@@ -2,7 +2,7 @@
 
 Thank you for helping keep **AzuDl - GC2GD** safe.
 
-AzuDl - GC2GD is a Google Colab based downloader that can interact with Google Drive, YouTube cookies, PO Tokens, aria2 sessions, torrent metadata, and user-provided links. Because of that, users and contributors must be careful not to expose private files, account data, or credentials.
+AzuDl - GC2GD is a Google Colab based downloader that can interact with Google Drive, YouTube cookies, PO Tokens, GitHub tokens, aria2 sessions, torrent metadata, and user-provided links. Because of that, users and contributors must be careful not to expose private files, account data, or credentials.
 
 ---
 
@@ -12,7 +12,7 @@ Security fixes are generally applied to the latest public release.
 
 | Version | Supported |
 |---|---|
-| `1.3.0 GUI Beta` | Yes |
+| `1.4.20 GUI Beta` | Yes |
 | Older versions | Best effort |
 
 If you are using an older version, please update to the latest release before reporting a security issue.
@@ -32,6 +32,7 @@ youtube_cookies.txt
 *.cookies
 youtube_po_token.txt
 youtube_visitor_data.txt
+github_token.txt
 aria2_rpc_secret.txt
 aria2.session
 download_history.json
@@ -50,6 +51,7 @@ Important rules:
 
 - Never commit real YouTube cookies.
 - Never commit real PO Tokens.
+- Never commit real GitHub tokens.
 - Never paste cookies or tokens into public GitHub issues.
 - Never share screenshots that reveal cookie values, tokens, account IDs, or private URLs.
 - Use placeholder values when sharing examples.
@@ -67,6 +69,54 @@ mweb+real_private_token_value_here
 ```
 
 ---
+
+
+---
+
+## GitHub Token Safety
+
+AzuDl may support GitHub tokens for private repositories or higher GitHub API rate limits.
+
+Important rules:
+
+- Never commit a real GitHub token.
+- Never paste a real GitHub token into public issues or pull requests.
+- Never share screenshots showing token values.
+- Use fine-grained tokens with the minimum permissions needed.
+- Revoke tokens immediately if they are exposed.
+
+AzuDl may create or read a token template at:
+
+```text
+/content/drive/MyDrive/AzuDl-GC2GD/Logs/github_token.txt
+```
+
+This file must stay private and should never be uploaded to GitHub.
+
+Safe placeholder:
+
+```text
+YOUR_GITHUB_TOKEN
+```
+
+Unsafe example:
+
+```text
+github_pat_REAL_PRIVATE_TOKEN_VALUE
+```
+
+---
+
+## Diagnostic Logs
+
+Diagnostic output may include repository names, file paths, URLs, and error messages.
+
+Before sharing diagnostic logs:
+
+- Remove private repository URLs.
+- Remove private file names.
+- Remove account identifiers.
+- Remove any tokens, cookies, passkeys, or signed URLs.
 
 ## Google Drive Safety
 
@@ -143,9 +193,11 @@ Do not include:
 - Real PO Tokens
 - Google account data
 - Private tracker passkeys
+- GitHub tokens or private repository URLs
 - Private `.torrent` files
 - Private download links
 - Full download history containing private data
+- GitHub tokens or private repository URLs
 
 Use placeholders instead.
 

@@ -6,6 +6,63 @@ This project follows a simple release history format. Versions are listed from n
 
 ---
 
+## `1.4.20 GUI Beta`
+
+### Added
+
+- Added GitHub repository downloader tab.
+- Added Official project repository tab for `https://github.com/TheGreatAzizi/AzuDL-GC2GD`.
+- Added GitHub token field inside the GUI.
+- Added GitHub token save, clear, and status actions.
+- Added GitHub API rate-limit status display.
+- Added support for latest release, all releases, specific release tag, and default branch source downloads.
+- Added GitHub README and license download options.
+- Added Google Drive verified transfer workflow for GitHub and YouTube outputs.
+- Added chunk-based Google Drive copy with `fsync`, system `sync`, and post-copy visibility verification.
+- Added Force Drive sync action in Maintenance.
+- Added System Diagnostic action.
+- Added diagnostic checks for direct download access, GitHub API access, YouTube metadata access, and aria2 torrent engine startup.
+- Added separate Official tab instead of mixing the official project repository into the generic GitHub tab.
+- Added mobile-friendly tab overflow behavior.
+- Added improved button styling, hover states, disabled states, and role-based colors.
+- Added safer GitHub token template file.
+
+### Changed
+
+- Kept the version naming style as `GUI Beta`.
+- Improved GUI button design across the full project.
+- Improved Maintenance tab layout.
+- Improved Official repository workflow.
+- Improved GitHub downloader workflow.
+- Improved Drive transfer reliability by using local temporary processing before Google Drive transfer where needed.
+- Improved YouTube transfer reliability by verifying final files after copy.
+- Improved GitHub transfer reliability by verifying final files after copy.
+- Improved user-facing text so it targets public end users rather than internal development notes.
+- Improved Help text for YouTube cookies, PO Token, GitHub tokens, Drive visibility, diagnostics, and official repository downloads.
+- Improved mobile usability for narrow displays.
+
+### Fixed
+
+- Fixed GitHub token recursion issue.
+- Fixed GitHub repository info recursion issue.
+- Fixed Official repository info recursion issue.
+- Fixed Maintenance handler name mismatches.
+- Fixed missing Diagnostic button in Maintenance.
+- Fixed syntax issue caused by stale duplicated notebook cells.
+- Fixed Official repository default download behavior so it can fall back to default branch source ZIP.
+- Fixed cases where GitHub download reported success with only README when no release assets existed.
+- Fixed Google Drive copy verification being too weak for Drive UI sync delays.
+- Fixed accidental temporary folder display in torrent output.
+- Fixed raw traceback display for common GUI validation errors.
+
+### Notes
+
+- Google Drive web/app UI may show files slightly later than the Colab mount. AzuDl verifies files on the mounted Drive path and includes a Force Drive sync action.
+- For private GitHub repositories or higher API limits, use the GitHub token field in the GitHub tab.
+- Real cookies, PO tokens, visitor data, GitHub tokens, aria2 secrets, and private tracker files must stay private.
+
+---
+
 ## `1.3.0 GUI Beta`
 
 ### Added
@@ -155,13 +212,13 @@ os.environ["AZUDL_INTERFACE"] = "cli"
 For the GUI beta release:
 
 ```text
-release: AzuDl GC2GD v1.3.0 GUI Beta
+release: AzuDl GC2GD v1.4.20 GUI Beta
 ```
 
 Alternative:
 
 ```text
-feat(gui): add Colab widget interface beta
+feat(gui): improve GUI beta with GitHub downloader diagnostics and Drive transfer verification
 ```
 
 For security/documentation files:

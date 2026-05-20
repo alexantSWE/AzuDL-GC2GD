@@ -11,13 +11,24 @@ AzuDl - GC2GD یک دانلودر یونیورسال مبتنی بر Google Cola
 ## نسخه
 
 ```text
-Version: 1.3.0 GUI Beta
+Version: 1.4.20 GUI Beta
 ```
 
 ---
 
 ## امکانات
 
+- دانلودر ریپوزیتوری GitHub
+- تب اختصاصی ریپوزیتوری رسمی پروژه
+- فیلد GitHub token و نمایش rate limit
+- دانلود release tag مشخص از GitHub
+- دانلود release assets و source archive از GitHub
+- دانلود README و License از GitHub
+- انتقال verify شده فایل‌ها به Google Drive
+- ابزار Force Drive sync
+- ابزار Run diagnostic
+- تب‌های سازگارتر با موبایل
+- رنگ‌بندی و طراحی بهتر دکمه‌ها
 - رابط گرافیکی بتا داخل Google Colab
 - داشبورد تب‌بندی‌شده
 - دانلود لینک مستقیم به Google Drive
@@ -57,18 +68,18 @@ Version: 1.3.0 GUI Beta
 
 ---
 
-## <img src="https://img.shields.io/badge/v1.3.0-GUI%20Beta-5865F2?style=for-the-badge" alt="v1.3.0 GUI Beta">
+## <img src="https://img.shields.io/badge/v1.4.20-GUI%20Beta-5865F2?style=for-the-badge" alt="1.4.20 GUI Beta">
 
 > [!IMPORTANT]
-> نسخه `1.3.0 GUI Beta` اولین رابط گرافیکی Colab را برای **AzuDl - GC2GD** اضافه می‌کند.  
+> نسخه `1.4.20 GUI Beta` اولین رابط گرافیکی Colab را برای **AzuDl - GC2GD** اضافه می‌کند.  
 > رابط کلاسیک CLI هنوز در دسترس است، اما تجربه پیش‌فرض از این نسخه به بعد GUI است.
 
 <details>
-<summary><strong>در v1.3.0 GUI Beta چه چیزی جدید است؟</strong></summary>
+<summary><strong>در 1.4.20 GUI Beta چه چیزی جدید است؟</strong></summary>
 
 <br>
 
-نسخه `1.3.0 GUI Beta` یک رابط گرافیکی مبتنی بر widgetهای Google Colab به AzuDl - GC2GD اضافه می‌کند.
+نسخه `1.4.20 GUI Beta` یک رابط گرافیکی مبتنی بر widgetهای Google Colab به AzuDl - GC2GD اضافه می‌کند.
 
 این نسخه بتا همچنان workflow قدیمی CLI را نگه می‌دارد، اما یک GUI تب‌بندی‌شده اضافه می‌کند تا کاربرانی که ترجیح می‌دهند با دکمه، فرم، dropdown، checkbox و کنترل‌های تصویری کار کنند، نیازی به وارد کردن شماره منوها نداشته باشند.
 
@@ -104,7 +115,7 @@ Version: 1.3.0 GUI Beta
 
 <br>
 
-از نسخه `1.3.0 GUI Beta` به بعد، رابط پیش‌فرض برنامه GUI است.
+از نسخه `1.4.20 GUI Beta` به بعد، رابط پیش‌فرض برنامه GUI است.
 
 وقتی سلول notebook به صورت عادی اجرا شود، AzuDl رابط گرافیکی Colab را اجرا می‌کند:
 
@@ -137,8 +148,11 @@ Dashboard
 Auto
 Direct
 YouTube
+Auth
 Torrent
 Batch
+GitHub
+Official
 Files
 Archives
 Maintenance
@@ -165,13 +179,13 @@ Guide
 <br>
 
 ```text
-release: AzuDl GC2GD v1.3.0 GUI Beta
+release: AzuDl GC2GD 1.4.20 GUI Beta
 ```
 
 جایگزین:
 
 ```text
-feat(gui): add Colab widget interface beta
+feat(gui): add GitHub downloader diagnostics and verified Drive transfer
 ```
 
 </details>
@@ -226,8 +240,11 @@ Dashboard
 Auto
 Direct
 YouTube
+Auth
 Torrent
 Batch
+GitHub
+Official
 Files
 Archives
 Maintenance
@@ -245,7 +262,9 @@ Guide
 | Batch | دانلود چند لینک به صورت پشت سر هم |
 | Files | لیست دانلودها، نمایش آخرین فایل و محاسبه SHA256 |
 | Archives | ساخت فایل ZIP |
-| Maintenance | ذخیره aria2 session، حذف GID، پاکسازی stopped tasks و بررسی storage |
+| GitHub | دانلود release، asset، source archive، README و License از ریپوزیتوری‌های GitHub |
+| Official | دانلود ریپوزیتوری رسمی AzuDl بدون نیاز به وارد کردن URL |
+| Maintenance | ذخیره aria2 session، حذف GID، پاکسازی stopped tasks، Force Drive sync، اجرای Diagnostic و بررسی storage |
 | Developer | نمایش لینک‌های پروژه و توسعه‌دهنده |
 | Guide | نمایش راهنما، cookie help و PO Token help |
 
@@ -265,6 +284,7 @@ AzuDl-GC2GD/
 ├── YouTubeDownloads/
 ├── DirectDownloads/
 ├── BatchDownloads/
+├── GitHubDownloads/
 ├── Archives/
 └── Logs/
 ```
@@ -275,10 +295,101 @@ AzuDl-GC2GD/
 | `YouTubeDownloads` | ویدیو، پلی‌لیست و صوت YouTube |
 | `DirectDownloads` | دانلود لینک‌های مستقیم |
 | `BatchDownloads` | خروجی دانلودهای گروهی |
+| `GitHubDownloads` | دانلودهای GitHub، release، asset و ریپوزیتوری رسمی پروژه |
 | `Archives` | فایل‌های ZIP ساخته‌شده توسط AzuDl |
 | `Logs` | تاریخچه، aria2 session file، قالب cookies، قالب token و فایل‌های debug |
 
 ---
+
+
+---
+
+## دانلودر ریپوزیتوری GitHub
+
+تب GitHub می‌تواند اطلاعات ریپوزیتوری را دریافت کند و فایل‌ها را مستقیم داخل Google Drive ذخیره کند.
+
+فرمت ورودی:
+
+```text
+https://github.com/owner/repository
+```
+
+حالت‌های دانلود:
+
+| حالت | توضیح |
+|---|---|
+| Latest release | دانلود assetها و source archive از آخرین release |
+| Specific release tag | دانلود فایل‌های یک tag مشخص |
+| All releases | دانلود فایل‌های همه releaseهای برگشتی از GitHub |
+| Default branch source | دانلود ZIP شاخه پیش‌فرض ریپوزیتوری |
+
+گزینه‌های اختیاری:
+
+- Release assets
+- Source ZIP/TAR archives
+- README
+- License candidates
+
+برای ریپوزیتوری private یا محدودیت API بالاتر، GitHub token را داخل تب GitHub وارد کنید و روی **Save token** بزنید.
+
+AzuDl قالب token را اینجا نگه می‌دارد:
+
+```text
+/content/drive/MyDrive/AzuDl-GC2GD/Logs/github_token.txt
+```
+
+روش جایگزین با environment variable:
+
+```text
+AZUDL_GITHUB_TOKEN
+```
+
+هیچ‌وقت GitHub token واقعی را منتشر یا commit نکنید.
+
+---
+
+## ریپوزیتوری رسمی پروژه
+
+تب Official مخصوص ریپوزیتوری رسمی AzuDl است:
+
+```text
+https://github.com/TheGreatAzizi/AzuDL-GC2GD
+```
+
+این تب می‌تواند releaseها، assetها، source archiveها، README، License یا ZIP شاخه اصلی را دانلود کند.
+
+اگر release asset موجود نباشد، AzuDl می‌تواند به ZIP شاخه پیش‌فرض fallback کند.
+
+---
+
+## تست Diagnostic
+
+در تب Maintenance دکمه **Run diagnostic** وجود دارد.
+
+این تست موارد زیر را بررسی می‌کند:
+
+- دسترسی دانلود مستقیم
+- دسترسی GitHub API
+- دسترسی metadata از YouTube
+- راه‌اندازی موتور aria2 torrent
+
+این بخش برای بررسی سریع سلامت runtime بعد از اجرای Colab مفید است.
+
+---
+
+## انتقال verify شده به Google Drive
+
+AzuDl برای فایل‌هایی که ابتدا local پردازش می‌شوند، انتقال قابل اطمینان‌تری به Google Drive انجام می‌دهد.
+
+مراحل:
+
+1. دانلود یا پردازش فایل در temporary storage کولب
+2. کپی chunk-based به Google Drive
+3. اجرای flush و `fsync`
+4. اجرای sync سیستم
+5. بازخوانی و verify فایل نهایی روی مسیر mount شده Drive
+
+اگر Google Drive در وب یا اپ موبایل فایل را سریع نشان نداد، Drive را refresh کنید یا کمی صبر کنید. تب Maintenance ابزار **Force Drive sync** دارد.
 
 ## فایل aria2 Session
 
@@ -286,6 +397,7 @@ AzuDl اطلاعات session مربوط به aria2 را اینجا ذخیره م
 
 ```text
 /content/drive/MyDrive/AzuDl-GC2GD/Logs/aria2.session
+download_history.json
 ```
 
 این فایل کمک می‌کند aria2 بعد از restart شدن notebook، تسک‌های ناتمام را دوباره بارگذاری کند.
@@ -803,11 +915,13 @@ cookies.txt
 youtube_cookies.txt
 youtube_po_token.txt
 youtube_visitor_data.txt
+github_token.txt
 *_cookies.txt
 *.cookies
 *.token
 aria2_rpc_secret.txt
 aria2.session
+download_history.json
 ```
 
 ---
@@ -860,20 +974,20 @@ AzuDl - GC2GD یک دانلودر یونیورسال مبتنی بر Google Cola
 ## پیام Commit پیشنهادی
 
 ```text
-release: AzuDl GC2GD v1.3.0 GUI Beta
+release: AzuDl GC2GD 1.4.20 GUI Beta
 ```
 
 جایگزین:
 
 ```text
-feat(gui): add Colab widget interface beta
+feat(gui): add GitHub downloader diagnostics and verified Drive transfer
 ```
 
 ---
 
 ## Changelog
 
-### v1.3.0 GUI Beta
+### 1.4.20 GUI Beta
 
 - اضافه شدن GUI beta مبتنی بر widgetهای Colab
 - اضافه شدن dashboard تب‌بندی‌شده
@@ -885,6 +999,20 @@ feat(gui): add Colab widget interface beta
 - باقی ماندن CLI کلاسیک
 - تنظیم GUI به عنوان رابط پیش‌فرض
 - بهبود تجربه استفاده برای کاربران عمومی GitHub
+
+### v1.4.20 GUI Beta
+
+- اضافه شدن دانلودر ریپوزیتوری GitHub
+- اضافه شدن تب Official برای ریپوزیتوری رسمی پروژه
+- اضافه شدن فیلد GitHub token، token status و نمایش rate limit
+- اضافه شدن دانلود latest release، all releases، release tag و default branch source
+- اضافه شدن دانلود README و License از GitHub
+- اضافه شدن انتقال verify شده به Google Drive با chunked copy، fsync، sync و visibility check
+- اضافه شدن Force Drive sync
+- اضافه شدن Run diagnostic
+- بهبود طراحی دکمه‌ها، تب‌های موبایل، تب Maintenance و متن‌های کاربرمحور
+- رفع recursion مربوط به GitHub token، GitHub info و Official repo
+- رفع handler mismatchها و مشکل نمایش دکمه Diagnostic
 
 ### v1.2.8
 
